@@ -1,0 +1,24 @@
+@import "@/styles/breakpoints";
+
+.shell {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100dvh;
+}
+.body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  min-height: 0;
+}
+.main {
+  min-width: 0;
+  overflow: auto;
+  background: #f9fbff;
+}
+
+/* small: sidebar overlays, so main spans full width */
+@include down(sm) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}

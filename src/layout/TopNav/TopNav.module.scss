@@ -1,0 +1,159 @@
+@import "@/styles/variables";
+@import "@/styles/breakpoints";
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 72px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "logo search actions";
+  column-gap: 1rem;
+  align-items: center;
+  padding: 0 1.25rem;
+  background: $nav-bg;
+  box-shadow: 10px 5px 5px #0000000a;
+}
+
+.left {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  .menu {
+    display: none;
+  }
+  @include down(lg) {
+    .menu {
+      display: inline-flex;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      i {
+        color: #39cdcc;
+        font-size: 22px;
+      }
+    }
+  }
+}
+.logo {
+  height: 28px;
+}
+
+.search {
+  grid-area: search;
+  display: flex;
+  align-items: stretch;
+  margin: auto;
+  width: clamp(240px, 32vw, 400px);
+  height: 40px;
+  min-width: 0;
+  overflow: hidden;
+
+  @include down(lg) {
+    width: clamp(200px, 24vw, 300px);
+  }
+
+  @include down(sm) {
+    width: 100%;
+  }
+
+  input {
+    flex: 1;
+    height: 40px;
+    min-width: 0;
+    background: #fff;
+    border: 1px solid $border;
+    border-right: 0;
+    border-radius: 8px 0 0 8px;
+    padding: 0 1rem;
+    outline: none;
+    color: $ink;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  button {
+    width: 48px;
+    height: 40px;
+    border: 0;
+    background: $brand;
+    color: #fff;
+    border-radius: 0 8px 8px 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+}
+
+.right {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  a {
+    text-decoration: underline;
+    color: #213f7d;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  i {
+    font-size: 26px;
+  }
+}
+.docs {
+  color: $link;
+  font-weight: 600;
+  text-decoration: none;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: $ink-strong;
+  font-weight: 500;
+  font-size: 16px;
+}
+.down {
+  width: 7.5px;
+  height: 4px;
+}
+
+@include down(md) {
+  .docs {
+    display: none;
+  }
+  .profile .name {
+    display: none;
+  }
+}
+
+@include down(sm) {
+  .nav {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 56px auto;
+    grid-template-areas:
+      "logo actions"
+      "search search";
+    height: auto;
+    row-gap: 0.75rem;
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+  .profile .down {
+    display: none;
+  }
+  .right {
+    gap: 0.75rem;
+  }
+}
