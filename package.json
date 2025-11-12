@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .ts,.tsx,.js",
     "test": "vitest run",
     "test:ui": "vitest",
+    "test:ci": "vitest run --reporter=dot --ui=false",
     "test:cov": "vitest run --coverage"
   },
   "dependencies": {

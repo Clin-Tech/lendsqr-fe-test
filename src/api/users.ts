@@ -32,7 +32,9 @@ export async function getUser(id: string): Promise<UserDetail> {
   if (cached) {
     try {
       return JSON.parse(cached);
-    } catch {}
+    } catch (e) {
+      localStorage.removeItem(k);
+    }
   }
   const res = await fetch(`/api/users/${id}`);
   if (!res.ok) throw new Error(`User ${id} not found`);
