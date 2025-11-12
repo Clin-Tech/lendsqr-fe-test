@@ -3,13 +3,14 @@ import Login from "./pages/Login/Login";
 import AppShell from "./layout/AppShell";
 import SectionPlaceholder from "./pages/SectionPlaceholder/SectionPlaceholder";
 import UsersPage from "./pages/UsersPage/UsersPage";
+import UserDetails from "./pages/Users/UserDetails";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
   {
     element: <AppShell />,
     children: [
-      { index: true, element: <Navigate to="/customers/users" replace /> },
+      // { index: true, element: <Navigate to="/customers/users" replace /> },
 
       {
         path: "dashboard",
@@ -121,6 +122,11 @@ export const router = createBrowserRouter([
       },
 
       { path: "*", element: <Navigate to="/customers/users" replace /> },
+      {
+        path: "customers/users/:id",
+        element: <UserDetails />,
+        handle: { title: "User Details" },
+      },
     ],
   },
 ]);

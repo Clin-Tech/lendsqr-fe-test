@@ -11,7 +11,7 @@ export default function Login() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && pw) nav("/dashboard");
+    if (email && pw) nav("/users");
   };
 
   return (

@@ -27,6 +27,7 @@ import UsersWithSavings from "./user-savings.png";
 import FilterBtn from "./filterBtn.png";
 import BlacklistUser from "./blackUser.png";
 import ActivateUser from "./activateUser.png";
+import ProfilePix from "./user-profile.png";
 
 export {
   DP,
@@ -58,4 +59,5 @@ export {
   FilterBtn,
   BlacklistUser,
   ActivateUser,
+  ProfilePix,
 };

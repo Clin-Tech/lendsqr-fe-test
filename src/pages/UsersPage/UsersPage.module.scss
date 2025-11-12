@@ -52,6 +52,7 @@
 
 .tableWrap {
   border: 1px solid #e5eaf2;
+  position: relative;
   border-radius: 4px;
   background: #fff;
   overflow-x: auto;
@@ -73,6 +74,11 @@ thead th {
   padding: 14px 16px;
   border-bottom: 1px solid #e5eaf2;
 
+  @include down(md) {
+    font-size: 10px;
+    padding: 12px 8px;
+  }
+
   div {
     display: inline-flex;
     align-items: center;
@@ -91,6 +97,11 @@ tbody td {
   color: #545f7d;
   font-size: 14px;
   border-bottom: 1px solid #f1f4f9;
+
+  @include down(md) {
+    font-size: 12px;
+    padding: 12px 8px;
+  }
 }
 tbody tr:hover {
   background: #fafcff;
@@ -155,12 +166,22 @@ tbody tr:hover {
   align-items: center;
   gap: 1rem;
   padding: 12px 16px;
+
+  @include down(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 .rowsInfo {
   font-weight: 400;
   font-size: 14px;
   color: #545f7d;
+
+  @include down(sm) {
+    font-size: 12px;
+  }
 }
 .rowsInfo select {
   border: 1px solid #e5eaf2;
@@ -173,6 +194,10 @@ tbody tr:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+
+  @include down(sm) {
+    gap: 0.05rem;
+  }
 }
 .pageBtn {
   font-weight: 400;
@@ -184,6 +209,12 @@ tbody tr:hover {
   background: #fff;
   cursor: pointer;
   color: #21407d6c;
+
+  @include down(sm) {
+    font-size: 12px;
+    height: 24px;
+    min-width: 24px;
+  }
 }
 
 .pageBtnn {
@@ -203,30 +234,39 @@ tbody tr:hover {
   cursor: not-allowed;
 }
 
-.tableWrap {
-  position: relative;
-  border: 1px solid #e5eaf2;
-  border-radius: 4px;
-  background: #fff;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 2px #10182808;
-}
-
-thead th div {
+.thInner {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.filterBtn {
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  line-height: 0;
+.thLabel {
+  color: #545f7d;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
+
+.filterBtn {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 4px;
+}
+.filterBtn:focus-visible {
+  outline: 2px solid #39cdcc;
+  outline-offset: 2px;
+}
+
+// .filterBtn {
+//   background: none;
+//   border: 0;
+//   padding: 0;
+//   cursor: pointer;
+//   line-height: 0;
+// }
 
 .filterPop {
   position: absolute;
@@ -248,6 +288,10 @@ thead th div {
       font-weight: 500;
       color: #545f7d;
       font-weight: 500;
+
+      @include down(sm) {
+        font-size: 12px;
+      }
     }
     input,
     select {
@@ -259,6 +303,10 @@ thead th div {
       color: #545f7d;
       font-size: 14px;
       outline: none;
+
+      @include down(sm) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -278,6 +326,10 @@ thead th div {
       font-weight: 600;
       font-size: 14px;
       font-family: "Work Sans", sans-serif;
+
+      @include down(sm) {
+        font-size: 12px;
+      }
     }
     .applyBtn {
       height: 40px;
@@ -319,6 +371,10 @@ thead th div {
   z-index: 35;
   min-width: 180px;
 
+  @include down(sm) {
+    min-width: 140px;
+  }
+
   .rowMenuItem {
     width: 100%;
     display: flex;
@@ -332,6 +388,10 @@ thead th div {
     font-weight: 500;
     font-size: 14px;
     text-align: left;
+
+    @include down(sm) {
+      font-size: 12px;
+    }
 
     &:hover {
       background: #fafcff;

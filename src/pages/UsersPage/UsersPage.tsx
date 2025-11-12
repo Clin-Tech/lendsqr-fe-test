@@ -272,95 +272,117 @@ export default function UsersPage() {
           <thead>
             <tr>
               <th>
-                <div>
-                  ORGANIZATION
+                <div className={s.thInner}>
+                  <span className={s.thLabel}>ORGANIZATION</span>
                   <button
+                    type="button"
                     className={s.filterBtn}
                     onClick={openFilter}
-                    aria-label="Open filters"
+                    aria-label="Open filters for Organization"
                   >
-                    <img src={FilterBtn} alt="" />
+                    <img src={FilterBtn} alt="" aria-hidden="true" />
                   </button>
                 </div>
               </th>
+
               <th>
-                <button
-                  className={s.thBtn}
-                  onClick={() => toggleSort("username")}
-                  aria-label="Sort by Username"
-                >
-                  <div>
-                    USERNAME
-                    <button
-                      className={s.filterBtn}
-                      onClick={openFilter}
-                      aria-label="Open filters"
-                    >
-                      <img src={FilterBtn} alt="" />
-                    </button>
-                  </div>
-                </button>
-              </th>
-              <th>
-                <button
-                  className={s.thBtn}
-                  onClick={() => toggleSort("email")}
-                  aria-label="Sort by Email"
-                >
-                  <div>
-                    EMAIL
-                    <button
-                      className={s.filterBtn}
-                      onClick={openFilter}
-                      aria-label="Open filters"
-                    >
-                      <img src={FilterBtn} alt="" />
-                    </button>
-                  </div>
-                </button>
-              </th>
-              <th>
-                <div>
-                  PHONE NUMBER
+                <div className={s.thInner}>
                   <button
+                    type="button"
+                    className={s.thBtn}
+                    onClick={() => toggleSort("username")}
+                    aria-label="Sort by Username"
+                  >
+                    <span>USERNAME</span>
+                    {sort === "username" ? (dir === "asc" ? " ▲" : " ▼") : null}
+                  </button>
+                  <button
+                    type="button"
                     className={s.filterBtn}
                     onClick={openFilter}
-                    aria-label="Open filters"
+                    aria-label="Open filters for Username"
                   >
-                    <img src={FilterBtn} alt="" />
+                    <img src={FilterBtn} alt="" aria-hidden="true" />
                   </button>
                 </div>
               </th>
+
               <th>
-                <button
-                  className={s.thBtn}
-                  onClick={() => toggleSort("dateJoined")}
-                  aria-label="Sort by Date Joined"
-                >
-                  <div>
-                    DATE JOINED
-                    <button
-                      className={s.filterBtn}
-                      onClick={openFilter}
-                      aria-label="Open filters"
-                    >
-                      <img src={FilterBtn} alt="" />
-                    </button>
-                  </div>
-                </button>
-              </th>
-              <th>
-                <div>
-                  STATUS
+                <div className={s.thInner}>
                   <button
+                    type="button"
+                    className={s.thBtn}
+                    onClick={() => toggleSort("email")}
+                    aria-label="Sort by Email"
+                  >
+                    <span>EMAIL</span>
+                    {sort === "email" ? (dir === "asc" ? " ▲" : " ▼") : null}
+                  </button>
+                  <button
+                    type="button"
                     className={s.filterBtn}
                     onClick={openFilter}
-                    aria-label="Open filters"
+                    aria-label="Open filters for Email"
                   >
-                    <img src={FilterBtn} alt="" />
+                    <img src={FilterBtn} alt="" aria-hidden="true" />
                   </button>
                 </div>
               </th>
+
+              <th>
+                <div className={s.thInner}>
+                  <span className={s.thLabel}>PHONE NUMBER</span>
+                  <button
+                    type="button"
+                    className={s.filterBtn}
+                    onClick={openFilter}
+                    aria-label="Open filters for Phone Number"
+                  >
+                    <img src={FilterBtn} alt="" aria-hidden="true" />
+                  </button>
+                </div>
+              </th>
+
+              <th>
+                <div className={s.thInner}>
+                  <button
+                    type="button"
+                    className={s.thBtn}
+                    onClick={() => toggleSort("dateJoined")}
+                    aria-label="Sort by Date Joined"
+                  >
+                    <span>DATE JOINED</span>
+                    {sort === "dateJoined"
+                      ? dir === "asc"
+                        ? " ▲"
+                        : " ▼"
+                      : null}
+                  </button>
+                  <button
+                    type="button"
+                    className={s.filterBtn}
+                    onClick={openFilter}
+                    aria-label="Open filters for Date Joined"
+                  >
+                    <img src={FilterBtn} alt="" aria-hidden="true" />
+                  </button>
+                </div>
+              </th>
+
+              <th>
+                <div className={s.thInner}>
+                  <span className={s.thLabel}>STATUS</span>
+                  <button
+                    type="button"
+                    className={s.filterBtn}
+                    onClick={openFilter}
+                    aria-label="Open filters for Status"
+                  >
+                    <img src={FilterBtn} alt="" aria-hidden="true" />
+                  </button>
+                </div>
+              </th>
+
               <th aria-hidden />
             </tr>
           </thead>
@@ -429,7 +451,7 @@ export default function UsersPage() {
           </tbody>
         </table>
 
-        {filterOpen && (
+        {paged.length > 0 && filterOpen && (
           <div
             ref={filterRef}
             className={s.filterPop}
@@ -536,63 +558,61 @@ export default function UsersPage() {
             </div>
           </div>
         )}
+      </div>
 
-        <div className={s.tableFooter}>
-          <div className={s.rowsInfo}>
-            Showing&nbsp;
-            <select
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                setPage(1);
-              }}
-            >
-              {[10, 20, 50, 100].map((n) => (
-                <option key={n} value={n}>
-                  {n}
-                </option>
-              ))}
-            </select>
-            &nbsp;out of {total}
-          </div>
-
-          <nav className={s.pager} aria-label="Pagination">
-            <button
-              className={s.pageBtnn}
-              disabled={page === 1}
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-            >
-              ‹
-            </button>
-
-            {pageItems.map((it, idx) =>
-              it === "ellipsis" ? (
-                <span key={`e${idx}`} className={s.ellipsis}>
-                  …
-                </span>
-              ) : (
-                <button
-                  key={it}
-                  className={[s.pageBtn, it === page ? s.current : ""].join(
-                    " "
-                  )}
-                  onClick={() => setPage(it)}
-                  aria-current={it === page ? "page" : undefined}
-                >
-                  {it}
-                </button>
-              )
-            )}
-
-            <button
-              className={s.pageBtnn}
-              disabled={page === totalPages}
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            >
-              ›
-            </button>
-          </nav>
+      <div className={s.tableFooter}>
+        <div className={s.rowsInfo}>
+          Showing&nbsp;
+          <select
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+              setPage(1);
+            }}
+          >
+            {[10, 20, 50, 100].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+          &nbsp;out of {total}
         </div>
+
+        <nav className={s.pager} aria-label="Pagination">
+          <button
+            className={s.pageBtnn}
+            disabled={page === 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            ‹
+          </button>
+
+          {pageItems.map((it, idx) =>
+            it === "ellipsis" ? (
+              <span key={`e${idx}`} className={s.ellipsis}>
+                …
+              </span>
+            ) : (
+              <button
+                key={it}
+                className={[s.pageBtn, it === page ? s.current : ""].join(" ")}
+                onClick={() => setPage(it)}
+                aria-current={it === page ? "page" : undefined}
+              >
+                {it}
+              </button>
+            )
+          )}
+
+          <button
+            className={s.pageBtnn}
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+          >
+            ›
+          </button>
+        </nav>
       </div>
     </section>
   );
