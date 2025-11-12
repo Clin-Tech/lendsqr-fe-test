@@ -20,25 +20,41 @@ export type ListUsersResponse = {
 export async function listUsers(
   params: ListUsersParams = {}
 ): Promise<ListUsersResponse> {
-  const qs = new URLSearchParams(params as Record<string, string>);
+  const qs = new URLSearchParams();
+  if (params.page != null) qs.set("page", String(params.page));
+  if (params.pageSize != null) qs.set("perPage", String(params.pageSize));
+  if (params.status) qs.set("status", params.status);
+  if (params.org) qs.set("org", params.org);
+  if (params.q) qs.set("q", params.q);
+  if (params.sort) qs.set("sort", params.sort);
+  if (params.dir) qs.set("dir", params.dir);
+
   const res = await fetch(`/api/users?${qs.toString()}`);
   if (!res.ok) throw new Error("Failed to load users");
-  return res.json();
+  return (await res.json()) as ListUsersResponse;
 }
 
 export async function getUser(id: string): Promise<UserDetail> {
-  const k = `user:${id}`;
-  const cached = localStorage.getItem(k);
+  const key = `user:${id}`;
+
+  const cached = localStorage.getItem(key);
   if (cached) {
     try {
-      return JSON.parse(cached);
-    } catch (e) {
-      localStorage.removeItem(k);
+      return JSON.parse(cached) as UserDetail;
+    } catch {
+      localStorage.removeItem(key);
     }
   }
+
   const res = await fetch(`/api/users/${id}`);
   if (!res.ok) throw new Error(`User ${id} not found`);
-  const data: UserDetail = await res.json();
-  localStorage.setItem(k, JSON.stringify(data));
+  const data = (await res.json()) as UserDetail;
+
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch {
+    /* ignore */
+  }
+
   return data;
 }
