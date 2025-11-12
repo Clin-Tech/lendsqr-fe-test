@@ -69,6 +69,7 @@ export default function Sidebar({
                   <li key={j}>
                     <NavLink
                       to={it.to}
+                      onClick={onClose}
                       ref={i === 0 && j === 0 ? firstLinkRef : undefined}
                       className={({ isActive }) =>
                         [s.item, isActive ? s.active : ""].join(" ")

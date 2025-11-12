@@ -20,6 +20,13 @@ import Preferences from "./preferences.png";
 import SavingsProducts from "./savings-products.png";
 import ServiceAccount from "./service-account.png";
 import Settlements from "./settlements.png";
+import UsersIcon from "./user-users.png";
+import ActiveUsers from "./user-active.png";
+import UsersWithLoans from "./user-loans.png";
+import UsersWithSavings from "./user-savings.png";
+import FilterBtn from "./filterBtn.png";
+import BlacklistUser from "./blackUser.png";
+import ActivateUser from "./activateUser.png";
 
 export {
   DP,
@@ -44,4 +51,11 @@ export {
   SavingsProducts,
   ServiceAccount,
   Settlements,
+  UsersIcon,
+  ActiveUsers,
+  UsersWithLoans,
+  UsersWithSavings,
+  FilterBtn,
+  BlacklistUser,
+  ActivateUser,
 };

@@ -1,4 +1,6 @@
-@import "./variables";
+@use "@/styles/variables" as *;
+@use "@/styles/breakpoints" as *;
+
 * {
   box-sizing: border-box;
 }

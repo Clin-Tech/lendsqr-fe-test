@@ -1,23 +1,25 @@
-@import "@/styles/breakpoints";
+@use "@/styles/variables" as *;
+@use "@/styles/breakpoints" as *;
 
 .shell {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100dvh;
+  background: #f9fafb;
+  min-height: 100dvh;
 }
 .body {
   display: grid;
-  grid-template-columns: auto 1fr;
-  min-height: 0;
-}
-.main {
-  min-width: 0;
-  overflow: auto;
-  background: #f9fbff;
+  grid-template-columns: $sidebar-width 1fr;
 }
 
-/* small: sidebar overlays, so main spans full width */
-@include down(sm) {
+.main {
+  min-height: calc(100dvh - 72px);
+  padding: 1.25rem 1.5rem;
+  overflow: auto;
+  color: #213f7d;
+  background: #fbfbfb;
+  border-left: 1px solid transparent;
+}
+
+@include down(lg) {
   .body {
     grid-template-columns: 1fr;
   }

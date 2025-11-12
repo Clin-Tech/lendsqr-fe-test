@@ -1,0 +1,12 @@
+@use "@/styles/variables" as *;
+@use "@/styles/breakpoints" as *;
+
+.wrap {
+  padding: 1.25rem 1.5rem;
+}
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #213f7d;
+}
