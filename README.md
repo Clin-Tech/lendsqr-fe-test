@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# Lendsqr FE Test — Clinton Atayero
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live: https://clinton-atayero-lendsqr-fe-test.vercel.app  
+Repo: https://github.com/Clin-Tech/lendsqr-fe-test
 
-Currently, two official plugins are available:
+## Stack & Rationale
+- React + TypeScript: type-safe UI, reliable refactors.
+- SCSS Modules: pixel-perfect fidelity, design tokens via variables, custom mixins for breakpoints.
+- MSW (mock API): deterministic dev/test without network flakiness; 500 fake users from faker seed.
+- Routing: react-router; shell layout + nested routes.
+- State/Data: local component state + URL, simple hooks; no server state lib needed for mock scale.
+- Caching (Requirement): **LocalStorage** on User Details for offline repeat loads.
+- Testing: Vitest + RTL for rendering, sorting, caching.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Architecture
+- `/layout` AppShell, TopNav, Sidebar.
+- `/pages/Login`, `/pages/UsersPage`, `/pages/Users` (details), `/pages/SectionPlaceholder`.
+- `/mocks` MSW handlers + seeded data.
+- `/styles` variables + breakpoints mixins; responsive grid and overflow decisions aligned to Figma.
 
-## React Compiler
+## UX & Fidelity
+- Typography: Work Sans (public). Avenir Next is proprietary → used **system stack fallback** pending confirmation.
+- Components match spacing, colors, borders, icon sizes, hover states, and selection bars as in Figma.
+- Tables: sticky header styles, responsive overflow-x, exact pagination labels.
+- Details page: tabs are horizontally scrollable on small screens; actions aligned; KPI + pills colors match spec.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Accessibility
+- Semantic headings, aria-labels on interactive icons, `aria-current` on pagination.
+- Keyboard: escape to close menus, visible focus for nav and rows.
+- Color contrast checked against brand palette.
 
-## Expanding the ESLint configuration
+## Performance
+- Vite build; code-split by route; images optimized; minimal re-renders (memoized slices).
+- MSW only in dev; no runtime SW in prod bundle.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tests
+- UsersPage renders, paginates, sorts.
+- UserDetails cache test (LocalStorage-first).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tradeoffs
+- Used LocalStorage instead of IndexedDB for simplicity (spec allows either).
+- SCSS `@import` deprecation warnings kept (non-blocking); `@use` migration left as a follow-up to avoid risk close to deadline.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## How to Run
+```bash
+npm ci
+npm run dev
+npm run test
+npm run build && npm run preview
