@@ -4,7 +4,7 @@ import s from "./SectionPlaceholder.module.scss";
 
 export default function SectionPlaceholder() {
   const m = useMatches();
-  const title = (m.at(-1)?.handle as { title?: string })?.title ?? "—";
+  const title = (m[m.length - 1]?.handle as { title?: string })?.title ?? "—";
 
   useEffect(() => {
     document.title = `${title} • Lendsqr`;
